@@ -1,8 +1,13 @@
 import React, {useState} from 'react';
+import NavBar from "../NAVBAR/NavBar.jsx";
+import Carousel from '../CAROUSEL/Carousel.jsx';
+import Others from '../OTHERS/Others.jsx';
+
 function Home()
 {
     return(
         <>
+        <NavBar/>
         <div className="home-container">
             <div class="tagline">
                 <h1>Experience-Powered</h1>
@@ -20,6 +25,8 @@ function Home()
                 </div>  
             </div>           
         </div>
+        <Carousel></Carousel>
+        <Others></Others>
         </>
     );
 }

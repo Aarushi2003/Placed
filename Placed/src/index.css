@@ -124,7 +124,7 @@ header{
   overflow: hidden;
   border-width: 2px;
   border-color:white;
-  width:100%;
+  /* width:100%; */
 
 }
 
@@ -162,7 +162,7 @@ header{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: inherit;
     padding: 40px;
     position: relative;
 }

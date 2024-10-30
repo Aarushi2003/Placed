@@ -1,16 +1,25 @@
 import { useState } from 'react';
-import NavBar from "./NAVBAR/NavBar.jsx";
+import ReactDOM from "react-dom/client";
+import Companies from "./COMPANIES/Companies.jsx";
 import Home from "./HOME/Home.jsx";
-import Carousel from './CAROUSEL/Carousel.jsx';
-import Others from './OTHERS/Others.jsx';
+import NavBar from './NAVBAR/NavBar.jsx';
+
+import { BrowserRouter, Routes, Route} from "react-router-dom";
+
+
 function App() {
   return (
-    <>
-      <NavBar></NavBar>
-      <Home></Home>
-      <Carousel></Carousel>
-      <Others></Others>
-    </>
-  );
+
+    <BrowserRouter>
+      {/* <NavBar></NavBar> */}
+      <div className="App">
+          <Routes>
+            <Route exact path="/" element={<Home />}/>
+            <Route path="/comps" element={<Companies />} />
+          </Routes>
+      </div>
+  </BrowserRouter>
+
+);
 }
 export default App;
