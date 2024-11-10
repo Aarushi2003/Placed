@@ -33,19 +33,12 @@ function Companies(){
     return (
         <>
             <NavBar/>
-            <div className="searchbar">
-                <SearchBar onSearchChange = {handleChange} />
-            </div>
-            {/* <button onClick={() => console.log(currSearchText)}>aa</button> */}
-            <div className="overall">
-                <div className="scroll-container-left">
-                    <ScrollContainer value = {currSearchText}/>
+            <div className="top">
+                <div className="searchbar">
+                    <SearchBar onSearchChange = {handleChange} />
                 </div>
-                <div className="company-details-right">
-                    <div className="company-top">
+                <div className="company-top">
                         <CompanyCard company = {{ name: "TLSE", type: "abcd", img: "123.png", id: 1 }}/>
-                    </div>
-                    <div className="info-text">
                         <div class="tabs">
                                 <div class="tab-list">
                                     {alltabs.map((curr) =>(
@@ -55,6 +48,27 @@ function Companies(){
                                     ))}
                                 </div>
                         </div>
+                </div>
+            </div>
+            {/* <button onClick={() => console.log(currSearchText)}>aa</button> */}
+            <div className="overall">
+                <div className="scroll-container-left">
+                    <ScrollContainer value = {currSearchText}/>
+                </div>
+                <div className="company-details-right">
+                    {/* <div className="company-top">
+                        <CompanyCard company = {{ name: "TLSE", type: "abcd", img: "123.png", id: 1 }}/>
+                    </div> */}
+                    <div className="info-text">
+                        {/* <div class="tabs">
+                                <div class="tab-list">
+                                    {alltabs.map((curr) =>(
+                                        <div>
+                                            <button className="tab-tab" id={curr} onClick={changeTab}>{curr}</button>
+                                        </div>
+                                    ))}
+                                </div>
+                        </div> */}
                         <div className="tab-items">
 
                             {tabInfo[currTab].map((item) =>(

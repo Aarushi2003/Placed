@@ -9,11 +9,15 @@
     width: 100%;
     justify-content: center;
 }
+
 .company-top{
     /* background-color: yellow; */
+    width: 70%;
+    padding-top: 15px;
+    padding-left: 30px;
     display: flex;
     color: white;
-    justify-content: center;
+    justify-content: left;
 }
 .overall{
     display: flex;
@@ -31,8 +35,10 @@
 }
 
 .tabs{
+    width: 100%;
     display: flex;
-    justify-content: center;
+    padding-left: 260px;
+    justify-content: left;
 }
 .tab-tab{
     background-color:#B6410F;
@@ -58,7 +64,7 @@
     justify-content: center;
 }
 .tab-items{
-    height: 290px;
+    height: calc(100vh - 235px);
     overflow-y: scroll;
 }
 .tab-items::-webkit-scrollbar-track
@@ -76,4 +82,7 @@
 {
 	background-color :#B6410F;	
 	background: linear-gradient(0deg, #98380e, #98380e)
+}
+.top{
+    display: flex;
 }

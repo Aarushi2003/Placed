@@ -4,7 +4,7 @@
 
 .search-input {
     height: 45px;
-    width: 500px;
+    width: 220px;
     font-size: large;
     text-align: left;
     color: rgb(0, 0, 0);
@@ -17,7 +17,7 @@
     border-color:white;
     font-size:1rem;
     font-weight: bold;
-    padding: 14px 25px;
+    padding: 14px 10px;
     border:none;
     border-radius: 0px;
     cursor:pointer;
