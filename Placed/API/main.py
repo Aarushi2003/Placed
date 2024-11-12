@@ -6,7 +6,7 @@ from pymongo.errors import DuplicateKeyError
 from typing import List, Optional
 
 
-#swagger docs https://api-4wettnp0r-lyes-projects-bd83505c.vercel.app/docs
+#swagger docs https://api-lyart-delta.vercel.app/docs
 
 app = FastAPI()
 
