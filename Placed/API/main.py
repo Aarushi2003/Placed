@@ -7,6 +7,7 @@ from typing import List, Optional
 
 
 #swagger docs https://api-lyart-delta.vercel.app/docs
+# [0-9]*@kiit.ac.in
 
 app = FastAPI()
 
@@ -41,6 +42,19 @@ class Question(BaseModel):
     title: str
     content: str
     user_id: int
+    type: str
+    tags: List[str]
+
+
+class QuestionResp(BaseModel):
+    id: Optional[int] = None
+    title: str
+    content: str
+    user_id: int
+    type: str
+    tags: List[str]
+    user_name: str
+    user_profile_pic: str
 
 
 #schema for user submission form
@@ -48,8 +62,10 @@ class QuestionWithCompany(BaseModel):
     user_id: int
     title: str
     content: str
+    type: str
     company_name: str
-    company_img_url: str
+    company_img_url: Optional[str]
+    tags: List[str]
 
 #user schemas
 class UserCreate(BaseModel):
@@ -57,13 +73,24 @@ class UserCreate(BaseModel):
     email_id: str
     questions: List[int] = []
     profile_pic_url: str
+    password:  Optional[str]
 
 class UserResponse(BaseModel):
     id: int
     name: str
+    password: Optional[str]
     email_id: str
     questions: List[int]
     profile_pic_url: str
+
+class CompanyResp(BaseModel):
+    id: int = None
+    name: str
+    icon_url: str
+    questions: List[int]
+    packed_questions: List[QuestionResp]
+
+
 
 @app.get("/")
 def retuf():
@@ -87,6 +114,22 @@ def create_company(company: Company):
 def get_companies():
     companies = list(collection.find())
     return companies
+
+@app.get("/companies_with_question/", response_model=List[CompanyResp])
+def get_companies():
+    companies = list(collection.find())
+    questions = get_questions()
+    questions = {i["id"]: i for i in questions}
+    result = []
+    for c in companies:
+        ques = c["questions"]
+        try:
+            c["packed_questions"] = [questions[i] for i in ques]
+        except KeyError:
+            c["packed_questions"] = []
+        result.append(c)
+    return result
+
 
 @app.get("/companies/{company_id}", response_model=Company)
 def get_company(company_id: int):
@@ -144,10 +187,24 @@ def get_question(question_id: int):
     else:
         raise HTTPException(status_code=404, detail="Question not found")
 
-@app.get("/questions/", response_model=List[Question])
+@app.get("/questions/", response_model=List[QuestionResp])
 def get_questions():
     questions = list(question_collection.find())
-    return questions
+    result = []
+    for q in questions:
+        user = get_user(q["id"])
+        packed = {
+            "id": q["id"],
+            "title": q["title"],
+            "content": q["content"],
+            "user_id": q["user_id"],
+            "type": q["type"],
+            "tags": q["tags"],
+            "user_name": user.name,
+            "user_profile_pic": user.profile_pic_url
+        }
+        result.append(packed)
+    return result
 
 @app.post("/users/", response_model=UserResponse, status_code=201)
 def create_user(user: UserCreate):
@@ -156,6 +213,7 @@ def create_user(user: UserCreate):
     user_document = {
         "id": new_user_id,
         "name": user.name,
+        "password": user.password,
         "email_id": user.email_id,
         "questions": user.questions,
         "profile_pic_url": user.profile_pic_url
@@ -192,6 +250,8 @@ def add_question_with_company(question_data: QuestionWithCompany):
         "id": new_question_id,
         "user_id": question_data.user_id,
         "title": question_data.title,
+        "type": question_data.type,
+        "tags": question_data.tags,
         "content": question_data.content
     }
     

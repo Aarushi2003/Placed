@@ -6,7 +6,7 @@ function CompanyCard(props) {
   return (
     <div className='company-card'>
         <span className="imspan">
-            <img className='company-img' src = "https://upload.wikimedia.org/wikipedia/commons/4/4a/Amazon_icon.svg"/>
+            <img className='company-img' src = {props.url}/>
         </span>
         <span className='textspan'>
             <div className='company-name'>{props.company.name}</div>

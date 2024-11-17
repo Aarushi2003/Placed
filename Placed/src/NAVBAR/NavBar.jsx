@@ -15,7 +15,7 @@ function NavBar()
                 <div className="nav-linkf">
                     <ul>
                         <li><a href="/comps">Companies</a></li>
-                        <li><a href="/#">Discussion Forums</a></li>
+                        <li><a href="/ques">Questions</a></li>
                         <li><a href="/#">Rounds</a></li>
                         <button className="profile-buttonf" onClick={""}><img src={profile}></img></button>
                     </ul>

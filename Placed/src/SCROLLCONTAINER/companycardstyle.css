@@ -1,8 +1,17 @@
 .company-img{
-    height:25px;
+    /* object-fit: cover; */
+    display: block;
+    max-width:25px;
+    max-height:25px;
+    min-width:25px;
+    min-height:25px;
+    width: auto;
+    height: auto;
     border-radius: 30px;
     padding: 5px 5px 5px 5px;
     background-color: aliceblue;
+    
+/* height: 250px; */
 }
 .company-card{
     display: flex;
